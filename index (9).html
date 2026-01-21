@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>SP 40 Series Upgrade | CI Precision - Enhanced Connectivity and Control</title>
+  <meta name="description" content="Upgrade SP 40 series weight sorter control units with FLEX2 and enhanced connectivity. Adds audit trail, domain authentication options, and secure data handling to support 21 CFR Part 11 / EU GMP Annex 11 data integrity expectations—plus ongoing support.">
+
+  <!-- Canonical & Social -->
+  <link rel="canonical" href="https://ciprecision.com/upgrades/sp40">
+  <meta property="og:title" content="SP 40 Series Upgrade | CI Precision">
+  <meta property="og:description" content="Upgrade SP 40 series control units with FLEX2, audit trail, domain authentication options, secure data handling, and OPC/UA connectivity—designed to support regulated data integrity expectations.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://ciprecision.com/upgrades/sp40">
+  <meta property="og:image" content="https://ciprecision.com/assets/sp40-upgrade-hero.webp">
+  <meta name="theme-color" content="#04647B">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SP 40 Series Upgrade | CI Precision">
+  <meta name="twitter:description" content="Upgrade SP 40 series control units with FLEX2, audit trail, secure data handling and OPC/UA connectivity—designed to support regulated data integrity expectations.">
+  <meta name="twitter:image" content="https://ciprecision.com/assets/sp40-upgrade-hero.webp">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+  <!-- Fonts (preconnects) -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" referrerpolicy="no-referrer">
+
+  <style>
+    /* CSS Variables */
+    :root {
+      --ci-teal: rgb(51, 131, 162);
+      --ci-green: rgb(117, 187, 89);
+      --ci-dark-gray: #2C3E50;
+      --ci-white: #ffffff;
+      --ci-light-gray: #F7F7F7;
+      --ci-teal-light: rgb(204, 224, 232);
+      --ci-green-light: rgb(228, 241, 217);
+      --ci-teal-dark: rgb(0, 99, 121);
+      --ci-accent: rgb(242, 248, 236);
+
+      --font-montserrat: 'Montserrat', sans-serif;
+
+      --shadow-light: 0 2px 10px rgba(4, 100, 123, 0.08);
+      --shadow-medium: 0 4px 20px rgba(4, 100, 123, 0.12);
+      --shadow-heavy: 0 8px 30px rgba(4, 100, 123, 0.15);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font-montserrat);
+      margin: 0; color: var(--ci-dark-gray); line-height: 1.6; overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-weight: 700; color: var(--ci-teal-dark); margin-top: 0; line-height: 1.3;
+    }
+    p { margin-bottom: 1rem; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .section { padding: 5rem 2rem; }
+
+    .header {
+      background: var(--ci-white); border-bottom: 1px solid var(--ci-teal-light);
+      box-shadow: var(--shadow-light); position: sticky; top: 0; z-index: 1000;
+    }
+    .header-content { display: flex; align-items: center; justify-content: space-between; padding: 1rem 0; }
+    .logo { height: 50px; width: auto; }
+    .header-contact { display: flex; align-items: center; gap: 2rem; }
+    .contact-info {
+      display: flex; align-items: center; gap: .5rem; color: var(--ci-teal-dark);
+      text-decoration: none; font-weight: 500; transition: color .2s;
+    }
+    .contact-info:hover { color: var(--ci-green); }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--ci-teal-dark), var(--ci-teal));
+      color: var(--ci-white); padding: 6rem 2rem 5rem; text-align: center; position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      background-size: 50px 50px; opacity: .3;
+    }
+    .hero-content { position: relative; z-index: 2; display: grid; gap: 1rem; }
+    /* Visual order: Tags (1) -> Eyebrow (2) -> Paragraph + H1 (3) -> CTAs (4) */
+    .hero-title { order: 3; font-size: clamp(2.2rem, 3vw + 1rem, 3.5rem); line-height: 1.2; margin: 1rem auto; max-width: 52ch; color: var(--ci-white); font-weight: 800; }
+    .hero-tags { order: 1; }
+    .hero-eyebrow { order: 2; color: var(--ci-white); font-size: 1.4rem; font-weight: 600; margin-bottom: 1rem; }
+    .hero p { order: 3; font-size: 1.2rem; max-width: 60ch; margin: 1.5rem auto; opacity: .95; }
+    .hero-ctas { order: 4; }
+
+    .tag {
+      display: inline-block; margin: .3rem; padding: .6rem 1.2rem; background: var(--ci-green); color: var(--ci-white);
+      border-radius: 25px; font-weight: 600; font-size: .9rem; box-shadow: var(--shadow-light); transition: transform .2s;
+    }
+    .tag:hover { transform: translateY(-2px); }
+
+    /* AI answer block (quote-ready) */
+    .ai-answer-block{
+      font-size: 1.05rem;
+      max-width: 70ch;
+      margin: 1.25rem auto 0;
+      padding: 1rem 1.25rem;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 12px;
+    }
+
+    /* Divider between sections (subtle gradient) */
+    .section-divider {
+      height: 2px; border: 0; margin: 0;
+      background: linear-gradient(90deg, transparent, var(--ci-teal-light), transparent);
+    }
+
+    /* Nav */
+    .subnav {
+      background: var(--ci-white); border-top: 3px solid var(--ci-green); border-bottom: 1px solid var(--ci-teal-light);
+      box-shadow: var(--shadow-light); position: sticky; top: 70px; z-index: 999;
+    }
+    .subnav .nav { display: flex; gap: .5rem; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 1rem 0; }
+    .subnav a {
+      white-space: nowrap; background: var(--ci-accent); padding: .7rem 1.2rem; border-radius: 25px; border: 1px solid var(--ci-teal-light);
+      color: var(--ci-teal-dark); text-decoration: none; font-weight: 500; transition: all .2s;
+    }
+    .subnav a:hover { background: var(--ci-teal-light); transform: translateY(-1px); }
+
+    /* Transformation */
+    .transformation-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(280px, 1fr)); gap: 2rem; margin-top: 3rem; position: relative;
+    }
+    /* Central connector arrow between cards (desktop only) */
+    .transformation-grid::after {
+      content: '→';
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      font-size: 3rem; line-height: 1; color: var(--ci-teal-light); pointer-events: none;
+    }
+    .transformation-card {
+      background: var(--ci-white); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-medium);
+      text-align: center; transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden;
+    }
+    .transformation-card.before { background: #fff5f5; }  /* more “urgent” */
+    .transformation-card.after  { background: #f4fbf6; }  /* more “positive” */
+    .transformation-card.before::before,
+    .transformation-card.after::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; border-top-left-radius: 16px; border-top-right-radius: 16px;
+    }
+    .transformation-card.before::before { background: #e74c3c; }
+    .transformation-card.after::before  { background: linear-gradient(90deg, var(--ci-green), var(--ci-teal)); }
+    .transformation-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-heavy); }
+    .transformation-icon {
+      width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem;
+    }
+    .transformation-card.before .transformation-icon { background: #ffebee; color: #e74c3c; }
+    .transformation-card.after  .transformation-icon { background: var(--ci-green-light); color: var(--ci-green); }
+    .transformation-card h3 { margin: 0 0 1rem; color: var(--ci-teal-dark); font-size: 1.4rem; }
+
+    /* Benefits Grid (callout) */
+    .compliance-benefits .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.25rem; }
+    .compliance-benefits .benefit-item i { font-size: 2.25rem; } /* slight enlarge for scan */
+
+    /* General benefits section cards */
+    .benefits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem; margin-top: 3rem;
+    }
+    .benefit-card {
+      background: var(--ci-white); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-medium);
+      text-align: center; transition: transform .3s, box-shadow .3s; position: relative; overflow: hidden;
+    }
+    .benefit-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--ci-green), var(--ci-teal)); border-top-left-radius: 16px; border-top-right-radius: 16px;
+    }
+    .benefit-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-heavy); }
+    .benefit-icon {
+      width: 60px; height: 60px; background: var(--ci-green-light); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; font-size: 1.5rem; color: var(--ci-green);
+    }
+
+    /* Validation Stepper */
+    .validation-stepper {
+      background: var(--ci-white); padding: 2.5rem; border-radius: 16px; box-shadow: var(--shadow-medium); margin-top: 3rem; position: relative; overflow: hidden;
+    }
+    .validation-stepper::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--ci-green), var(--ci-teal)); }
+    .stepper-content { display: flex; justify-content: space-between; align-items: flex-start; gap: 1.5rem; margin-top: 2rem; }
+    .step { text-align: center; flex: 1; position: relative; }
+    .step:not(:last-child)::after {
+      content: '→'; position: absolute; right: -25px; top: 35px; transform: translateY(-50%); font-size: 2rem; color: var(--ci-teal-light);
+    }
+    .step-icon { width: 70px; height: 70px; background: var(--ci-green); color: var(--ci-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; font-weight: 700; margin: 0 auto 1rem; }
+
+    /* Capabilities */
+    .capabilities-section { background: var(--ci-accent); }
+    .capabilities-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .capability-card {
+      background: var(--ci-white); border-radius: 16px; box-shadow: var(--shadow-medium); overflow: hidden; position: relative; transition: transform .3s, box-shadow .3s;
+    }
+    .capability-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-heavy); }
+    .capability-card.featured { background: linear-gradient(135deg, var(--ci-teal-dark), var(--ci-teal)); color: var(--ci-white); }
+    .capability-card:not(.featured)::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--ci-green), var(--ci-teal));
+      border-top-left-radius: 16px; border-top-right-radius: 16px;
+    }
+    .capability-content { padding: 2.5rem; }
+    .capability-card h3 { color: var(--ci-green); font-size: 1.5rem; margin: 0 0 1.5rem; }
+    .capability-card.featured h3, .capability-card.featured p { color: var(--ci-white); }
+    /* Prominent numbered steps */
+    .capability-card ol { padding-left: 1.5rem; counter-reset: step; }
+    .capability-card ol > li { margin: .9rem 0; list-style: none; position: relative; padding-left: 2.6rem; }
+    .capability-card ol > li::before {
+      counter-increment: step; content: counter(step);
+      position: absolute; left: 0; top: 0.1rem;
+      width: 2rem; height: 2rem; border-radius: 50%; background: var(--ci-green); color: var(--ci-white);
+      display: inline-flex; align-items: center; justify-content: center; font-weight: 700;
+    }
+
+    /* Table */
+    .comparison-table { overflow-x: auto; margin-top: 3rem; background: var(--ci-white); border-radius: 16px; box-shadow: var(--shadow-medium); }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 1.5rem 1rem; border-bottom: 1px solid var(--ci-teal-light); text-align: left; }
+    thead th {
+      background: linear-gradient(135deg, var(--ci-teal-dark), var(--ci-teal)); color: var(--ci-white); position: sticky; top: 0;
+    }
+    /* Subtle checkmark in header to reinforce checklist */
+    thead th:nth-child(2)::after {
+      content: '  ✓'; font-weight: 700; opacity: .85; margin-left: .25rem;
+    }
+    tbody tr:nth-child(odd) { background-color: var(--ci-accent); }
+    tbody tr:hover { background-color: var(--ci-green-light); transition: background-color .2s; }
+    .checkmark { color: var(--ci-green); font-weight: 700; font-size: 1.3em; }
+
+    /* FAQ */
+    .faq-section { background: var(--ci-accent); }
+    .faq-accordion { margin-top: 2rem; max-width: 700px; margin-inline: auto; }
+    .faq-item { background: var(--ci-white); margin-bottom: 1rem; border-radius: 12px; box-shadow: var(--shadow-light); overflow: hidden; position: relative; }
+    .faq-item::before {
+      content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--ci-green), var(--ci-teal));
+      border-top-left-radius: 12px; border-bottom-left-radius: 12px;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center; background: transparent; font-size: 1.1rem; font-weight: 600; color: var(--ci-teal-dark);
+      border: none; cursor: pointer; width: 100%; padding: 1.5rem 2rem; text-align: left; transition: background .2s;
+    }
+    .faq-question:hover { background: var(--ci-accent); }
+    .faq-answer { padding: 0 2rem 1.5rem; }
+    .faq-answer[hidden] { display: none; }
+
+    /* Contact Form */
+    .contact-form { background: var(--ci-white); padding: 3rem; border-radius: 16px; box-shadow: var(--shadow-medium); margin-top: 3rem; position: relative; overflow: hidden; }
+    .contact-form::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--ci-green), var(--ci-teal)); border-top-left-radius: 16px; border-top-right-radius: 16px; }
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-weight: 600; color: var(--ci-teal-dark); margin-bottom: .5rem; }
+    .form-group input, .form-group select, .form-group textarea { padding: 1rem; border: 2px solid var(--ci-teal-light); border-radius: 8px; transition: border-color .2s; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--ci-teal); }
+    .form-group.full-width { grid-column: 1 / -1; }
+
+    /* Trust badge (visual only) */
+    .trust-badge {
+      display: flex; justify-content: center; gap: 1.5rem; align-items: center; margin-bottom: 1rem; opacity: .9;
+    }
+    .trust-badge .badge {
+      width: 64px; height: 64px; border-radius: 50%; background: var(--ci-accent); display: inline-flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-light);
+    }
+    .trust-badge .badge i { font-size: 1.5rem; color: var(--ci-teal-dark); }
+
+    /* CTA Band */
+    .cta-band {
+      background: linear-gradient(135deg, var(--ci-green), var(--ci-teal)); color: var(--ci-white); text-align: center; padding: 4rem 2rem; position: relative; overflow: hidden;
+    }
+    .cta-band::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+      background-size: 30px 30px;
+    }
+    .cta-content { position: relative; z-index: 2; }
+    .cta-band h2 { color: var(--ci-white); margin-bottom: 1rem; font-size: 2.2rem; }
+    .btn { display: inline-block; padding: 1rem 2rem; background: var(--ci-green); color: var(--ci-white); border-radius: 8px; text-decoration: none; font-weight: 600; border: 2px solid transparent; transition: all .3s; margin: .5rem; position: relative; overflow: hidden; cursor: pointer; }
+    .btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent); transition: left .5s; }
+    .btn:hover::before { left: 100%; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(117, 187, 89, .3); }
+    .btn-secondary { background: var(--ci-white); color: var(--ci-teal-dark); border: 2px solid var(--ci-teal-light); }
+    .btn-secondary:hover { background: var(--ci-teal-light); border-color: var(--ci-teal); }
+
+    .section-header { text-align: center; margin-bottom: 3rem; }
+    .section-header h2 { font-size: 2.5rem; margin-bottom: 1rem; position: relative; }
+    .section-header h2::after {
+      content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 4px; background: linear-gradient(90deg, var(--ci-green), var(--ci-teal)); border-radius: 2px;
+    }
+    .section-header p { font-size: 1.1rem; max-width: 70ch; margin: 0 auto; opacity: .8; }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .transformation-grid { grid-template-columns: 1fr; }
+      .transformation-grid::after { display: none; }
+      .stepper-content { flex-direction: column; align-items: center; }
+      .step:not(:last-child)::after { display: none; }
+    }
+    @media (max-width: 768px) {
+      .section { padding: 3rem 1rem; }
+      .container { padding: 0 1rem; }
+      .hero { padding: 3rem 1rem; }
+      .hero-title { font-size: 2rem; }
+      .hero p { font-size: 1rem; }
+      .subnav { top: auto; position: relative; }
+      .benefits-grid, .capabilities-grid { grid-template-columns: 1fr; }
+      .compliance-benefits .benefits-grid { grid-template-columns: 1fr 1fr; }
+      th, td { padding: .8rem .5rem; font-size: .9rem; }
+    }
+    @media (max-width: 480px) {
+      .tag { display: block; margin: .2rem auto; width: fit-content; }
+      .compliance-benefits .benefits-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Motion & Focus */
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    a:focus-visible, .btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, .faq-question:focus-visible {
+      outline: 3px solid var(--ci-teal); outline-offset: 2px;
+    }
+
+    /* Utilities */
+    .text-center { text-align: center; }
+    .mb-0 { margin-bottom: 0; }
+    .mb-1 { margin-bottom: 1rem; }
+    .mb-2 { margin-bottom: 2rem; }
+    .mt-2 { margin-top: 2rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+    /* Button loading */
+    .btn.loading { pointer-events: none; opacity: .7; }
+    .btn.loading::after {
+      content: ''; position: absolute; width: 20px; height: 20px; top: 50%; left: 50%;
+      margin: -10px 0 0 -10px; border: 2px solid transparent; border-top: 2px solid currentColor; border-radius: 50%; animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Mobile sticky CTA */
+    .sticky-cta {
+      display: none;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 1001; padding: .75rem 1rem; text-align: center;
+      background: rgba(0,0,0,.35); backdrop-filter: blur(6px);
+    }
+    .sticky-cta .btn { margin: 0; }
+    @media (max-width: 768px) { .sticky-cta { display: block; } }
+  </style>
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"Organization",
+        "@id":"https://ciprecision.com/#org",
+        "name":"CI Precision Ltd",
+        "url":"https://ciprecision.com",
+        "telephone":"+44-1722-424100",
+        "email":"sales@ciprecision.com",
+        "logo":"https://ciprecision.com/assets/ci-precision-logo.png",
+        "address":{"@type":"PostalAddress","streetAddress":"Brunel Rd, Churchfields","addressLocality":"Salisbury","postalCode":"SP2 7PX","addressCountry":"GB"},
+        "slogan":"excellence in accuracy"
+      },
+      {
+        "@type":"Service",
+        "@id":"https://ciprecision.com/upgrades/sp40#service",
+        "name":"SP 40 Series Upgrade Service",
+        "url":"https://ciprecision.com/upgrades/sp40",
+        "description":"Professional upgrade service for SP 40 series weight sorters including FLEX2 operating system, audit trail, configurable access controls (incl. domain authentication options), secure data storage/transmission, and OPC/UA connectivity—designed to support regulated data integrity expectations (21 CFR Part 11 / EU GMP Annex 11).",
+        "provider":{"@id":"https://ciprecision.com/#org"},
+        "serviceType":"Equipment Upgrade",
+        "areaServed":"Global",
+        "applicationCategory":"Industrial Equipment",
+        "hasOfferCatalog":{
+          "@type":"OfferCatalog",
+          "name":"SP 40 Series Upgrade Options",
+          "itemListElement":[
+            {"@type":"Offer","itemOffered":{"@type":"Service","name":"SP 40 Series Control System Upgrade","description":"Upgrade to FLEX2 operating system with audit trail, configurable access controls, and secure data handling—designed to support regulated data integrity expectations."}},
+            {"@type":"Offer","itemOffered":{"@type":"Service","name":"Nexa Data Suite","description":"OPC/UA connectivity and encrypted data communications"}},
+            {"@type":"Offer","itemOffered":{"@type":"Service","name":"Validation Support Package","description":"IQ as standard plus options for OQ and PQ validation support with documentation"}}
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="sr-only" href="#main-content">Skip to main content</a>
+
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <img src="/assets/ci-precision-logo.png" alt="CI Precision – excellence in accuracy" class="logo" width="160" height="50" fetchpriority="high" decoding="async">
+        <div class="header-contact">
+          <a href="mailto:sales@ciprecision.com" class="contact-info" aria-label="Email CI Precision">
+            <i class="fas fa-envelope" aria-hidden="true"></i><span>sales@ciprecision.com</span>
+          </a>
+          <a href="tel:+441722424100" class="contact-info" aria-label="Call CI Precision">
+            <i class="fas fa-phone" aria-hidden="true"></i><span>+44 (0)1722 424100</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile sticky CTA (repeat of main CTA) -->
+  <div class="sticky-cta" aria-hidden="false">
+    <a href="#contact" class="btn">Get Your Upgrade Quote</a>
+  </div>
+
+  <main id="main-content">
+
+    <!-- Hero -->
+    <section id="hero" class="hero" role="banner" aria-label="SP 40 Series Upgrade hero">
+      <div class="container">
+        <div class="hero-content">
+
+          <h1 class="hero-title">SP 40 Series Upgrade – Control Unit Upgrade for Precision Weight Sorters</h1>
+
+          <!-- Tags first -->
+          <div class="hero-tags mb-2">
+            <span class="tag"><i class="fas fa-award" aria-hidden="true"></i> Audit-ready traceability</span>
+            <span class="tag"><i class="fas fa-shield-alt" aria-hidden="true"></i> Data integrity controls</span>
+            <span class="tag"><i class="fas fa-network-wired" aria-hidden="true"></i> Enhanced connectivity</span>
+          </div>
+
+          <!-- Eyebrow -->
+          <h2 class="hero-eyebrow">
+            Extend the service life of SP 40 Series equipment with FLEX2, enhanced connectivity, and data integrity controls designed to support regulated environments.
+          </h2>
+
+          <!-- AI Answer Block -->
+          <p class="ai-answer-block">
+            The SP 40 Series Upgrade replaces the legacy control unit with the FLEX2 operating system and modern connectivity for existing SP 40 precision weight sorters. It is intended for manufacturers who need ongoing support, improved traceability, and secure data handling as legacy systems move out of vendor support. The upgrade adds audit trail, configurable access controls (incl. domain authentication options), and secure storage/transmission, with OPC/UA available for SCADA integration.
+          </p>
+
+          <p>
+            The SP 40 series remains amongst the most capable and reliable precision weight sorters in operation.
+            As the original operating system moves out of support, upgrading helps maintain serviceability and strengthens data handling controls for regulated workflows.
+          </p>
+
+          <div class="hero-ctas mt-2">
+            <a href="#contact" class="btn">Get Your Upgrade Quote</a>
+            <a href="#benefits" class="btn btn-secondary">Explore Benefits</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Compliance Benefits Callout -->
+    <section class="compliance-benefits" style="background: linear-gradient(135deg, var(--ci-green), var(--ci-teal)); color: var(--ci-white); padding: 3rem 0;">
+      <div class="container">
+        <div class="text-center mb-1">
+          <h2 style="color: var(--ci-white); margin-bottom: .5rem;">Data Integrity & Upgrade Outcomes</h2>
+          <p style="font-size: 1.1rem; opacity: .9; max-width: 60ch; margin: 0 auto;">Key outcomes typically targeted by teams upgrading SP 40 control units.</p>
+        </div>
+
+        <div class="benefits-grid">
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">Data integrity controls (Part 11 / Annex 11 support)</h4>
+            <p style="margin: 0; opacity: .9;">Audit trail, configurable access controls, and secure data handling designed to support regulated expectations.</p>
+          </div>
+
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-user-shield" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">Domain authentication options</h4>
+            <p style="margin: 0; opacity: .9;">Use your own network security for user management and controlled data access.</p>
+          </div>
+
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-clipboard-check" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">Validation support</h4>
+            <p style="margin: 0; opacity: .9;">IQ standard, with options for OQ/PQ support and structured documentation.</p>
+          </div>
+
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">Data overwrite protection</h4>
+            <p style="margin: 0; opacity: .9;">Overwrite protection and complete batch genealogy tracking.</p>
+          </div>
+
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-sync-alt" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">Ongoing updates</h4>
+            <p style="margin: 0; opacity: .9;">Continuous updates as operational and regulatory expectations evolve.</p>
+          </div>
+
+          <div class="benefit-item" style="background: rgba(255,255,255,0.1); padding: 1.5rem; border-radius: 12px; text-align: center;">
+            <div style="font-size: 2.25rem; margin-bottom: 1rem;"><i class="fas fa-handshake" aria-hidden="true"></i></div>
+            <h4 style="margin-bottom: .5rem; color: var(--ci-white);">7+ years support</h4>
+            <p style="margin: 0; opacity: .9;">Long-term commitment with same-as-new machine support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Nav -->
+    <nav class="subnav" aria-label="Section navigation">
+      <div class="container nav">
+        <a href="#transformation"><i class="fas fa-exchange-alt" aria-hidden="true"></i> Transformation</a>
+        <a href="#benefits"><i class="fas fa-star" aria-hidden="true"></i> Benefits</a>
+        <a href="#capabilities"><i class="fas fa-cogs" aria-hidden="true"></i> Capabilities</a>
+        <a href="#validation"><i class="fas fa-clipboard-check" aria-hidden="true"></i> Validation</a>
+        <a href="#features"><i class="fas fa-table" aria-hidden="true"></i> Features</a>
+        <a href="#faq"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a>
+        <a href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Contact</a>
+      </div>
+    </nav>
+
+    <!-- Transformation -->
+    <section id="transformation" class="section" aria-labelledby="transformation-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="transformation-title">What changes after an SP 40 Series upgrade?</h2>
+          <p>Short answer: you move from legacy, print-led processes to stronger traceability, modern access control options, and improved connectivity.</p>
+        </div>
+        <div class="transformation-grid">
+          <div class="transformation-card before">
+            <div class="transformation-icon"><i class="fas fa-times" aria-hidden="true"></i></div>
+            <h3>Before Upgrade</h3>
+            <ul style="text-align:left; margin:.75rem 0 0; padding-left:1.25rem;">
+              <li>Print-led records</li>
+              <li>Local/standalone user management</li>
+              <li>Manual audit pack collation</li>
+              <li>Limited connectivity</li>
+              <li>Legacy operating system risk</li>
+            </ul>
+          </div>
+          <div class="transformation-card after">
+            <div class="transformation-icon"><i class="fas fa-check" aria-hidden="true"></i></div>
+            <h3>After Upgrade</h3>
+            <ul style="text-align:left; margin:.75rem 0 0; padding-left:1.25rem;">
+              <li>Audit trail</li>
+              <li>Domain authentication options</li>
+              <li>Secure storage and transmission</li>
+              <li>OPC/UA for SCADA</li>
+              <li>FLEX2 operating system</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider into solution section -->
+    <hr class="section-divider" aria-hidden="true">
+
+    <!-- Benefits -->
+    <section id="benefits" class="section" aria-labelledby="benefits-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="benefits-title">Why upgrade instead of replacing the machine?</h2>
+          <p>Short answer: SP 40 series weight sorters are highly reliable, and SP 60 series machines are mechanically identical except for the all-new control unit—so upgrading targets the control layer without replacing proven mechanical hardware.</p>
+        </div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-shield-alt" aria-hidden="true"></i></div>
+            <h3>Data integrity controls</h3>
+            <p>With the new control unit, your SP 40 series gains audit trail, domain authentication options, and secure storage/transmission of data—designed to support regulated data integrity expectations (21 CFR Part 11 / EU GMP Annex 11).</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-network-wired" aria-hidden="true"></i></div>
+            <h3>Enhanced connectivity and control</h3>
+            <p>The new control unit integrates with your domain controller for user management and data access. It can also share data with SCADA devices using OPC/UA.</p>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><i class="fas fa-dollar-sign" aria-hidden="true"></i></div>
+            <h3>Reduced resource costs</h3>
+            <p>With tighter security and streamlined data transfer, operating procedures around your SP 40 series can be simplified—from day-to-day operations to accessing batch reports and data.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities -->
+    <section id="capabilities" class="section capabilities-section" aria-labelledby="capabilities-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="capabilities-title">What capabilities do you gain with the new control unit?</h2>
+          <p>Short answer: FLEX2 on modern hardware, plus the Nexa data suite for extracting, sharing, and integrating data sources into operations.</p>
+        </div>
+        <div class="capabilities-grid">
+          <div class="capability-card featured">
+            <div class="capability-content">
+              <h3>Future-proofed control and data access</h3>
+              <p>The new control unit for your SP 40 series machines runs our latest operating system, FLEX2. This runs on the latest hardware, rigorously tested and underpinned by certified supply. It will continue to be updated as the business and regulatory landscape evolves.</p>
+              <p>It also includes the Nexa data suite, which provides standard functionality and extra options for extracting, sharing and integrating data sources into your operations.</p>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="capability-content">
+              <h3>Upgrade and validation</h3>
+              <p>All SP 40 series upgrades are carried out on-site by experienced engineers, using a tried and tested process:</p>
+              <ol>
+                <li>Quotation for upgrading one or more machines, including IQ as standard plus options for OQ and PQ.</li>
+                <li>On-site upgrade and IQ, plus OQ if selected.</li>
+                <li>Support for PQ with documentation, test scripts and hands-on support, as agreed.</li>
+                <li>Full documentation, traceability information and certification.</li>
+              </ol>
+            </div>
+          </div>
+          <div class="capability-card">
+            <div class="capability-content">
+              <h3>Support as-new</h3>
+              <p>Once upgraded, you are entitled to the same level of support as if it were a new machine.</p>
+              <p>We commit to maintaining our customers' SP 40 series weight sorters for at least seven years following their upgrade.</p>
+              <p>Any change parts you hold for SP 40 series machines continue to function exactly as before and remain compatible with SP 60 series weight sorters and accessories.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Validation -->
+    <section id="validation" class="section" aria-labelledby="validation-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="validation-title">What validation support is available?</h2>
+          <p>Short answer: IQ is standard with the upgrade, with options for OQ/PQ support and structured documentation to support your site validation activities.</p>
+        </div>
+        <div class="validation-stepper">
+          <h3 class="text-center mb-2"><i class="fas fa-clipboard-check" aria-hidden="true"></i> Comprehensive Validation Support</h3>
+          <div class="stepper-content">
+            <div class="step">
+              <div class="step-icon">IQ</div>
+              <div class="step-title">Installation Qualification</div>
+              <div class="step-description">Standard with every upgrade - comprehensive documentation provided</div>
+            </div>
+            <div class="step">
+              <div class="step-icon">OQ</div>
+              <div class="step-title">Operational Qualification</div>
+              <div class="step-description">Optional service with detailed test scripts and validation support</div>
+            </div>
+            <div class="step">
+              <div class="step-icon">PQ</div>
+              <div class="step-title">Performance Qualification</div>
+              <div class="step-description">Documentation, test scripts, and hands-on support provided (as agreed)</div>
+            </div>
+            <div class="step">
+              <div class="step-icon"><i class="fas fa-certificate" aria-hidden="true"></i></div>
+              <div class="step-title">Certification</div>
+              <div class="step-description">Traceability information and certification delivered</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Table -->
+    <section id="features" class="section" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="features-title">What does the upgrade add (feature-level view)?</h2>
+          <p>Short answer: stronger data controls, modern connectivity (incl. OPC/UA via Nexa), and continued support on modern hardware.</p>
+        </div>
+        <div class="comparison-table">
+          <table role="table" aria-describedby="features-caption">
+            <caption id="features-caption" style="padding: 1rem; font-weight: 600; color: var(--ci-dark-gray);">Comparison of SP 60 series upgrade benefits and features.</caption>
+            <thead>
+              <tr>
+                <th scope="col"><i class="fas fa-list-ul" aria-hidden="true"></i> Feature</th>
+                <th scope="col"><i class="fas fa-arrow-up" aria-hidden="true"></i> SP 60 Series Upgrade Benefits</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Data integrity controls (Part 11 / Annex 11 support)</strong></td>
+                <td class="checkmark">✓ Audit trail, access controls and secure data handling</td>
+              </tr>
+              <tr><td><strong>OPC/UA connectivity</strong></td><td class="checkmark">✓ Available with Nexa Connect</td></tr>
+              <tr><td><strong>Mechanical hardware</strong></td><td class="checkmark">✓ Proven reliability maintained</td></tr>
+              <tr><td><strong>Time to implement</strong></td><td class="checkmark">✓ Short on-site installation</td></tr>
+              <tr><td><strong>Capital investment</strong></td><td class="checkmark">✓ A fraction of the cost of a new machine</td></tr>
+              <tr><td><strong>Future-proofing</strong></td><td class="checkmark">✓ 7+ years continued support</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section faq-section" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="faq-title">Frequently Asked Questions</h2>
+          <p>Common questions about SP 40 series upgrade implementation and validation.</p>
+        </div>
+        <div class="faq-accordion" id="faq-accordion">
+
+          <!-- 1) Urgency question first, open by default -->
+          <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true" aria-controls="faq-a5" id="faq-q5">
+              <span><i class="fas fa-clock" aria-hidden="true"></i> What happens if I don't upgrade?</span>
+              <span class="indicator" aria-hidden="true">−</span>
+            </button>
+            <div class="faq-answer" id="faq-a5" role="region" aria-labelledby="faq-q5">
+              <p>
+                As the original operating system moves out of support, running legacy control systems can increase operational and data integrity risk over time.
+                Typical impacts include reduced ability to apply security updates, more manual effort to compile evidence for audits, and more friction integrating data into modern IT/OT environments.
+                An upgrade helps maintain serviceability and strengthens traceability controls for regulated workflows.
+              </p>
+            </div>
+          </div>
+
+          <!-- 2) Change parts -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-a1" id="faq-q1">
+              <span><i class="fas fa-tools" aria-hidden="true"></i> Will existing change parts still work?</span>
+              <span class="indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-a1" role="region" aria-labelledby="faq-q1" hidden>
+              <p>Yes. Any change parts you hold for your SP 40 series machines will continue to function exactly as before. They will also be compatible with any SP 60 series weight sorters and accessories you buy in future.</p>
+            </div>
+          </div>
+
+          <!-- 3) Validation support -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-a2" id="faq-q2">
+              <span><i class="fas fa-clipboard-check" aria-hidden="true"></i> What validation support is provided?</span>
+              <span class="indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-a2" role="region" aria-labelledby="faq-q2" hidden>
+              <p>We provide validation support including IQ as standard plus options for OQ and PQ. Engineers can support PQ with documentation, test scripts and hands-on support, as agreed, and provide documentation, traceability information and certification.</p>
+            </div>
+          </div>
+
+          <!-- 4) Data integrity controls via FLEX2 -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-a3" id="faq-q3">
+              <span><i class="fas fa-shield-alt" aria-hidden="true"></i> What data integrity controls are included with FLEX2?</span>
+              <span class="indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-a3" role="region" aria-labelledby="faq-q3" hidden>
+              <p>The FLEX2 operating system includes audit trail, domain authentication options, and secure storage/transmission of data—controls designed to support regulated data integrity expectations such as 21 CFR Part 11 / EU GMP Annex 11.</p>
+            </div>
+          </div>
+
+          <!-- 5) SCADA integration -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-a4" id="faq-q4">
+              <span><i class="fas fa-network-wired" aria-hidden="true"></i> Can I integrate with existing SCADA systems?</span>
+              <span class="indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-a4" role="region" aria-labelledby="faq-q4" hidden>
+              <p>Yes. The new control unit can share data with SCADA devices using OPC/UA. It also includes the Nexa data suite, which provides standard functionality and options for extracting, sharing and integrating data sources into your operations.</p>
+            </div>
+          </div>
+
+          <!-- 6) Ongoing support -->
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false" aria-controls="faq-a6" id="faq-q6">
+              <span><i class="fas fa-handshake" aria-hidden="true"></i> What ongoing support is provided?</span>
+              <span class="indicator" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer" id="faq-a6" role="region" aria-labelledby="faq-q6" hidden>
+              <p>Once upgraded, you are entitled to the same level of support as if it were a new machine. We commit to maintaining customers’ SP 40 series weight sorters for at least seven years following their upgrade.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-header">
+          <h2 id="contact-title">Next Steps</h2>
+          <p>To discuss your SP 40 series upgrade options, share how many machines you have, your target timeline, and any data integrity / connectivity requirements.</p>
+        </div>
+
+        <div class="contact-form">
+          <h3 class="text-center mb-2"><i class="fas fa-shield-alt" aria-hidden="true"></i> Request Your SP 40 Series Upgrade Assessment</h3>
+          <p id="form-status" role="status" aria-live="polite" class="sr-only"></p>
+
+          <form action="/contact" method="POST" class="contact-form-element" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              <div class="form-group">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company">
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+              </div>
+              <div class="form-group">
+                <label for="machines-count">Number of SP 40 Series Machines</label>
+                <select id="machines-count" name="machines-count">
+                  <option value="">Select quantity</option>
+                  <option value="1">1 machine</option>
+                  <option value="2-5">2-5 machines</option>
+                  <option value="6-10">6-10 machines</option>
+                  <option value="10+">10+ machines</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="urgency">Upgrade Timeline</label>
+                <select id="urgency" name="urgency">
+                  <option value="">Select timeline</option>
+                  <option value="immediate">Immediate - Within 1 month</option>
+                  <option value="short-term">Short-term - Within 3 months</option>
+                  <option value="medium-term">Medium-term - 6-12 months</option>
+                  <option value="long-term">Long-term planning</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label for="message">Current Setup &amp; Requirements</label>
+                <textarea id="message" name="message" rows="4" placeholder="Describe your current SP 40 series setup, any specific requirements (e.g., audit trail expectations, domain authentication, OPC/UA/SCADA), and questions about the upgrade process..."></textarea>
+              </div>
+            </div>
+            <div class="text-center mt-2">
+              <button type="submit" class="btn">Request Assessment</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Band -->
+    <section class="cta-band" aria-label="Contact CI Precision">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Need immediate assistance?</h2>
+          <p>Our technical team is ready to help you plan your SP 40 Series upgrade.</p>
+          <div>
+            <a href="mailto:sales@ciprecision.com?subject=SP%2040%20Series%20Upgrade%20Inquiry" class="btn" aria-label="Email CI Precision about SP 40 Series Upgrade">
+              <i class="fas fa-envelope" aria-hidden="true"></i> Email Us
+            </a>
+            <a href="tel:+441722424100" class="btn" aria-label="Call CI Precision at +44 1722 424100">
+              <i class="fas fa-phone" aria-hidden="true"></i> Call +44 (0)1722 424100
+            </a>
+          </div>
+          <p style="margin-top: 2rem; font-size: .9rem; opacity: .9;">
+            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+            CI Precision Ltd • Brunel Rd, Churchfields, Salisbury SP2 7PX, United Kingdom
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Demo form handling
+      const form = document.querySelector('.contact-form-element');
+      if (form) {
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const btn = this.querySelector('button[type="submit"]');
+          const statusEl = document.getElementById('form-status');
+          if (btn) { btn.classList.add('loading'); btn.textContent = 'Sending...'; }
+          if (statusEl) statusEl.textContent = 'Sending...';
+
+          setTimeout(() => {
+            if (btn) { btn.classList.remove('loading'); btn.textContent = 'Assessment Requested!'; btn.style.backgroundColor = 'var(--ci-teal)'; }
+            if (statusEl) statusEl.textContent = 'Assessment requested!';
+            this.reset();
+
+            setTimeout(() => {
+              if (btn) { btn.textContent = 'Request Assessment'; btn.style.backgroundColor = ''; }
+              if (statusEl) statusEl.textContent = '';
+            }, 3000);
+          }, 2000);
+        });
+      }
+
+      // Smooth scroll (respect reduced motion)
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const href = this.getAttribute('href');
+          if (!href || href === '#') return;
+          const target = document.querySelector(href);
+          if (!target) return;
+          e.preventDefault();
+          const headerOffset = 70;
+          const elementPosition = target.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: offsetPosition, behavior: prefersReduced ? 'auto' : 'smooth' });
+        });
+      });
+
+      // FAQ accordion (keep first item open by default)
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        const panelId = question ? question.getAttribute('aria-controls') : null;
+        const panel = panelId ? document.getElementById(panelId) : null;
+        const indicator = question ? question.querySelector('.indicator') : null;
+
+        if (question && panel) {
+          question.addEventListener('click', () => {
+            const expanded = question.getAttribute('aria-expanded') === 'true';
+
+            // Close others
+            faqItems.forEach(other => {
+              if (other !== item) {
+                const q = other.querySelector('.faq-question');
+                const pid = q ? q.getAttribute('aria-controls') : null;
+                const p = pid ? document.getElementById(pid) : null;
+                const ind = q ? q.querySelector('.indicator') : null;
+                if (q && p) { q.setAttribute('aria-expanded', 'false'); p.hidden = true; other.classList.remove('active'); if (ind) ind.textContent = '+'; }
+              }
+            });
+
+            // Toggle current
+            question.setAttribute('aria-expanded', String(!expanded));
+            panel.hidden = expanded;
+            item.classList.toggle('active', !expanded);
+            if (indicator) indicator.textContent = expanded ? '+' : '−';
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
